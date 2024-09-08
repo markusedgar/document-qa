@@ -1,3 +1,2 @@
 streamlit
-openai
-anthropic
+anthropic>=0.18.1

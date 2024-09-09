@@ -87,7 +87,7 @@ if submit_button:
         try:
             client = OpenAI(api_key=api_key)
             response = client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o",
                 messages=[
                     {"role": "system", "content": "You are a helpful design research assistant."},
                     {"role": "user", "content": f"Here's the research data:\n\n{research_data}\n\n{combined_prompt}"}

@@ -40,14 +40,14 @@ base_prompts = [
     2. For each relevant quote, note the name of the respondent and a brief summary of who they are (if provided).
     3. Determine how the quote relates to the research question.
 
-    Format your output using Markdown as follows:
+    Format your output using simple formatted text as follows:
 
-    ```markdown
-    ## [Name of Respondent] (brief summary of who they are)
+    ```text
+    [Name of Respondent] (brief summary of who they are)
 
     > "[Quote]"
 
-    *Relation to research question:* [Brief explanation of how the quote relates to the research question]
+    Relation to research question: [Brief explanation of how the quote relates to the research question]
     ```
 
     Important guidelines:

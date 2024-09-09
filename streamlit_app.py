@@ -1,14 +1,12 @@
 import streamlit as st
-import anthropic
+from openai import OpenAI
 
 st.title("📝 Analyse your research data")
 
 # Try to get the API key from secrets, otherwise use an input field
-api_key = st.secrets["ANTHROPIC_API_KEY"]
+api_key = st.secrets["OPENAI_API_KEY"]
 if not api_key:
-    st.error("Anthropic API key not found in secrets. Please add it to continue.")
-
-# Sidebar content removed
+    st.error("OpenAI API key not found in secrets. Please add it to continue.")
 
 import os
 
@@ -87,17 +85,18 @@ if submit_button:
     
     with st.spinner("Generating answer... Please wait."):
         try:
-            client = anthropic.Client(api_key=api_key)
-            message = client.messages.create(
-                model="claude-3-sonnet-20240229",
-                max_tokens=1024,
+            client = OpenAI(api_key=api_key)
+            response = client.chat.completions.create(
+                model="gpt-4",
                 messages=[
+                    {"role": "system", "content": "You are a helpful design research assistant."},
                     {"role": "user", "content": f"Here's the research data:\n\n{research_data}\n\n{combined_prompt}"}
-                ]
+                ],
+                max_tokens=1024
             )
             
             st.write("### Answer")
-            st.write(message.content[0].text)
+            st.write(response.choices[0].message.content)
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
             st.info("Please check your API key and try again.")

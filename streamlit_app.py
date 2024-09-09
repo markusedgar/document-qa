@@ -36,14 +36,12 @@ base_prompts = [
         Extract Quotes: Identify quotes from the transcripts that are directly related to the research question or theme.
         Respondent Identification: For each quote, note the respondent's name and provide a brief summary of who they are (if available).
         Quote Relevance: Briefly explain how each quote relates to the research question or theme.
-        
-        Formatting:
-        Use the following format for your output:
 
-        ```table
+        Formatting:
+
+        Use the following table format for your output:
         | Respondent Name (brief description) | "[Quote]" |  Relation to research question: [Concise explanation of how the quote connects to the research question] |
         
-        ```
         Additional Guidelines:
         Make sure to only include quotes that are directly related to the research question or theme.
         Keep explanations clear and to the point.

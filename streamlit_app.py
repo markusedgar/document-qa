@@ -26,29 +26,59 @@ for filename in os.listdir(data_dir):
 # Remove trailing newlines
 uploaded_file = uploaded_file.rstrip()
 
-# Default prompts
+# Default prompts and button titles
 default_prompts = [
-    "Can you give me a short summary?",
-    "What are the main points discussed in the article?",
-    "Who are the key people mentioned and what are their roles?"
+    ("Compile relevant quotes", """You are tasked with analyzing transcript data from 20 respondents and compiling a list of relevant quotes that relate to a specific research question. Your goal is to extract meaningful insights from the data and present them in a clear, organized manner.
+
+        First, carefully read and understand the research question.
+
+        Now, you will analyze the data.
+
+        As you go through the transcript data, follow these steps:
+
+        1. Identify quotes that are directly related to the research question.
+        2. For each relevant quote, note the name of the respondent and a brief summary of who they are (if provided).
+        3. Determine how the quote relates to the research question.
+
+        Format your output using Markdown as follows:
+
+        ```markdown
+        ## [Name of Respondent] (brief summary of who they are)
+
+        > "[Quote]"
+
+        *Relation to research question:* [Brief explanation of how the quote relates to the research question]
+        ```
+
+        Important guidelines:
+        - Ensure that each quote you select is directly relevant to the research question.
+        - Be concise in your explanations of how the quote relates to the research question.
+        - If multiple quotes from the same respondent are relevant, you may include them under the same respondent heading.
+        - Aim for clarity and readability in your output.
+
+        Remember to process all 20 respondents, even if some may not have relevant quotes. In such cases, you can simply omit that respondent from your output.
+
+        Begin your analysis now, and present your findings in the format specified above."""),
+    ("Main Points", "What are the main points discussed in the data?"),
+    ("Key Stakeholders", "Who are the key stakeholders mentioned and what are their roles?")
 ]
 
 # Buttons for default prompts
 col1, col2, col3 = st.columns(3)
 with col1:
-    if st.button(default_prompts[0]):
-        question = default_prompts[0]
+    if st.button(default_prompts[0][0]):
+        question = default_prompts[0][1]
 with col2:
-    if st.button(default_prompts[1]):
-        question = default_prompts[1]
+    if st.button(default_prompts[1][0]):
+        question = default_prompts[1][1]
 with col3:
-    if st.button(default_prompts[2]):
-        question = default_prompts[2]
+    if st.button(default_prompts[2][0]):
+        question = default_prompts[2][1]
 
 # Custom prompt text area
 custom_question = st.text_area(
     "Or ask a custom question about the article",
-    placeholder="Type your custom question here",
+    placeholder="Type your research question here",
     height=150,
     disabled=not uploaded_file,
 )

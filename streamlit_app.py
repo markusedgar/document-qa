@@ -63,28 +63,30 @@ default_prompts = [
     ("Key Stakeholders", "Who are the key stakeholders mentioned and what are their roles?")
 ]
 
-# Buttons for default prompts
-col1, col2, col3 = st.columns(3)
-with col1:
-    if st.button(default_prompts[0][0]):
-        question = default_prompts[0][1]
-with col2:
-    if st.button(default_prompts[1][0]):
-        question = default_prompts[1][1]
-with col3:
-    if st.button(default_prompts[2][0]):
-        question = default_prompts[2][1]
-
 # Custom prompt text area
 custom_question = st.text_area(
-    "Or ask a custom question about the article",
+    "Ask a research question about the article",
     placeholder="Type your research question here",
     height=150,
     disabled=not uploaded_file,
 )
 
-# Use custom question if provided, otherwise use the selected default prompt
-question = custom_question if custom_question else (question if 'question' in locals() else "")
+# Use custom question if provided, otherwise use an empty string
+question = custom_question if custom_question else ""
+
+# Buttons for default prompts
+col1, col2, col3 = st.columns(3)
+with col1:
+    st.button(default_prompts[0][0], disabled=not question, on_click=lambda: setattr(st.session_state, 'question', default_prompts[0][1]) if question else None)
+with col2:
+    st.button(default_prompts[1][0], disabled=not question, on_click=lambda: setattr(st.session_state, 'question', default_prompts[1][1]) if question else None)
+with col3:
+    st.button(default_prompts[2][0], disabled=not question, on_click=lambda: setattr(st.session_state, 'question', default_prompts[2][1]) if question else None)
+
+# Update question if a button was clicked
+if 'question' in st.session_state:
+    question = st.session_state.question
+
 
 if uploaded_file and question and not api_key:
     st.info("Please enter your Anthropic API key in the sidebar to continue.")

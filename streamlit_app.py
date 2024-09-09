@@ -1,7 +1,7 @@
 import streamlit as st
 import anthropic
 
-st.title("📝 File Q&A with Anthropic Claude 3.5 Sonnet")
+st.title("📝 Analyse your research data")
 
 # Try to get the API key from secrets, otherwise use an input field
 api_key = st.secrets["ANTHROPIC_API_KEY"]

@@ -40,14 +40,8 @@ base_prompts = [
         Formatting:
         Use the following format for your output:
 
-        ```txt
-        Respondent Name (brief description)
-
-        "[Quote]"
-
-        Relation to research question: [Concise explanation of how the quote connects to the research question]
-        
-        ----------------------------------------
+        ```table
+        | Respondent Name (brief description) | "[Quote]" |  Relation to research question: [Concise explanation of how the quote connects to the research question] |
         
         ```
         Additional Guidelines:

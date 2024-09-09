@@ -36,8 +36,8 @@ base_prompts = [
 
     As you go through the transcript data, follow these steps:
 
-    1. Identify quotes that are somehow related to the research question.
-    2. For each relevant quote, note the name of the respondent and a brief summary of who they are (if provided).
+    1. Identify quotes that are related to the research question.
+    2. For each quote, note the name of the respondent and a brief summary of who they are (if provided).
     3. Determine how the quote relates to the research question.
 
     Format your output using simple formatted text as follows:
@@ -51,7 +51,6 @@ base_prompts = [
     ```
 
     Important guidelines:
-    - Ensure that each quote you select is at least to some degree relevant to the research question.
     - Be concise in your explanations of how the quote relates to the research question.
     - If multiple quotes from the same respondent are relevant, you may include them under the same respondent heading.
     - Aim for clarity and readability in your output.
@@ -78,7 +77,7 @@ research_question = st.text_area(
 
 # Combine base prompt and research question (but don't display it)
 selected_base_prompt_text = next(prompt[1] for prompt in base_prompts if prompt[0] == selected_base_prompt)
-combined_prompt = f"{selected_base_prompt_text}\n\nResearch Question: {research_question}"
+combined_prompt = f"{selected_base_prompt_text}\n\nResearch Question or general research theme: {research_question}"
 
 # Submit button to trigger LLM request
 submit_button = st.button("Submit", disabled=not (uploaded_file and research_question and api_key))

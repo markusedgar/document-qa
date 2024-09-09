@@ -79,12 +79,9 @@ research_question = st.text_area(
     disabled=not uploaded_file,
 )
 
-# Combine base prompt and research question
+# Combine base prompt and research question (but don't display it)
 selected_base_prompt_text = next(prompt[1] for prompt in base_prompts if prompt[0] == selected_base_prompt)
 combined_prompt = f"{selected_base_prompt_text}\n\nResearch Question: {research_question}"
-
-# Display the combined prompt
-st.text_area("Combined Prompt", value=combined_prompt, height=200, disabled=True)
 
 # Submit button to trigger LLM request
 submit_button = st.button("Submit", disabled=not (uploaded_file and research_question and api_key))

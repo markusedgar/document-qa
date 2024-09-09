@@ -43,7 +43,7 @@ base_prompts = [
         | Respondent Name (brief description) | "[Quote]" |  Relation to research question: [Concise explanation of how the quote connects to the research question] |
         
         Additional Guidelines:
-        Make sure to only include quotes that are directly related to the research question or theme.
+        Make sure to mark up to 5 top quotes that are directly related to the research question or theme. Add more quotes that are more loosly related.
         Keep explanations clear and to the point.
         If a respondent has multiple relevant quotes, group them under their name.
         If no relevant quotes are found for a respondent, omit them from your output.

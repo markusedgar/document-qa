@@ -65,7 +65,7 @@ default_prompts = [
 
 # Custom prompt text area
 custom_question = st.text_area(
-    "Ask a research question about the article",
+    "Please add your research question",
     placeholder="Type your research question here",
     height=150,
     disabled=not uploaded_file,
@@ -77,22 +77,23 @@ question = custom_question if custom_question else ""
 # Buttons for default prompts
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.button(default_prompts[0][0], disabled=not question, on_click=lambda: setattr(st.session_state, 'question', default_prompts[0][1]) if question else None)
+    if st.button(default_prompts[0][0], disabled=not uploaded_file):
+        question = default_prompts[0][1]
 with col2:
-    st.button(default_prompts[1][0], disabled=not question, on_click=lambda: setattr(st.session_state, 'question', default_prompts[1][1]) if question else None)
+    if st.button(default_prompts[1][0], disabled=not uploaded_file):
+        question = default_prompts[1][1]
 with col3:
-    st.button(default_prompts[2][0], disabled=not question, on_click=lambda: setattr(st.session_state, 'question', default_prompts[2][1]) if question else None)
+    if st.button(default_prompts[2][0], disabled=not uploaded_file):
+        question = default_prompts[2][1]
 
-# Update question if a button was clicked
-if 'question' in st.session_state:
-    question = st.session_state.question
+# Display the selected question
+st.text_area("Selected Question", value=question, height=150, disabled=True)
 
+# Button to trigger LLM request
+trigger_llm = st.button("Generate Answer", disabled=not (uploaded_file and question and api_key))
 
-if uploaded_file and question and not api_key:
-    st.info("Please enter your Anthropic API key in the sidebar to continue.")
-
-if uploaded_file and question and api_key:
-    article = uploaded_file
+if trigger_llm:
+    research_data = uploaded_file
     
     try:
         client = anthropic.Client(api_key=api_key)
@@ -100,7 +101,29 @@ if uploaded_file and question and api_key:
             model="claude-3-sonnet-20240229",
             max_tokens=1024,
             messages=[
-                {"role": "user", "content": f"Here's an article:\n\n{article}\n\n{question}"}
+                {"role": "user", "content": f"Here's research data:\n\n{research_data}\n\n{question}"}
+            ]
+        )
+        
+        st.write("### Answer")
+        st.write(message.content[0].text)
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
+        st.info("Please check your API key and try again.")
+
+if uploaded_file and question and not api_key:
+    st.info("Please enter your Anthropic API key in the sidebar to continue.")
+
+if uploaded_file and question and api_key:
+    research_data = uploaded_file
+    
+    try:
+        client = anthropic.Client(api_key=api_key)
+        message = client.messages.create(
+            model="claude-3-sonnet-20240229",
+            max_tokens=1024,
+            messages=[
+                {"role": "user", "content": f"Here's research data:\n\n{research_data}\n\n{question}"}
             ]
         )
         

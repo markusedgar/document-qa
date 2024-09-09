@@ -1,2 +1,2 @@
 streamlit
-anthropic>=0.18.1
+openai

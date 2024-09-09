@@ -39,8 +39,9 @@ base_prompts = [
 
         Formatting:
 
-        Use the following table format for your output:
-        | Respondent Name (brief description) | "[Quote]" |  Relation to research question: [Concise explanation of how the quote connects to the research question] |
+        Use the following format for your output:
+        * Respondent Name (brief description): "[Quote]" 
+        ** Relation to research question: [Concise explanation of how the quote connects to the research question] |
         
         Additional Guidelines:
         Make sure to mark up to 5 top quotes that are directly and strictly related to the research question or theme. You can iuclude more quotes if they are still directly related.

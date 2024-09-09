@@ -36,7 +36,7 @@ base_prompts = [
 
     As you go through the transcript data, follow these steps:
 
-    1. Identify quotes that are directly related to the research question.
+    1. Identify quotes that are somehow related to the research question.
     2. For each relevant quote, note the name of the respondent and a brief summary of who they are (if provided).
     3. Determine how the quote relates to the research question.
 
@@ -51,16 +51,14 @@ base_prompts = [
     ```
 
     Important guidelines:
-    - Ensure that each quote you select is directly relevant to the research question.
+    - Ensure that each quote you select is at least to some degree relevant to the research question.
     - Be concise in your explanations of how the quote relates to the research question.
     - If multiple quotes from the same respondent are relevant, you may include them under the same respondent heading.
     - Aim for clarity and readability in your output.
 
     Remember to process all 20 respondents, even if some may not have relevant quotes. In such cases, you can simply omit that respondent from your output.
 
-    Begin your analysis now, and present your findings in the format specified above."""),
-    ("Key Stakeholders", "Review the research data and identify the key stakeholders mentioned. For each stakeholder:")
-]
+    Begin your analysis now, and present your findings in the format specified above.""")]
 
 # Selectbox for choosing a base prompt
 selected_base_prompt = st.selectbox(

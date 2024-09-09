@@ -26,36 +26,31 @@ uploaded_file = uploaded_file.rstrip()
 
 # Base prompts
 base_prompts = [
-    ("Compile relevant quotes", """You are tasked with analyzing transcript data from 20 respondents and compiling a list of relevant quotes that relate to a specific research question. Your goal is to extract meaningful insights from the data and present them in a clear, organized manner.
+    ("Compile relevant quotes", """You are tasked with analyzing transcript data from 20 respondents to compile a list of relevant quotes that address a specific research question. Your objective is to extract and present key insights from the data in an organized, easy-to-read format.
 
-    First, carefully read and understand the research question.
+        Instructions:
+        Understand the Research Question: Start by thoroughly reading and comprehending the research question.
+        Analyze the Transcript Data: Go through the transcript data to identify quotes relevant to the research question.
+        Steps:
+        Extract Quotes: Identify quotes from the transcripts that are directly related to the research question.
+        Respondent Identification: For each quote, note the respondent's name and provide a brief summary of who they are (if available).
+        Quote Relevance: Briefly explain how each quote relates to the research question.
+        Formatting:
+        Use the following format for your output:
 
-    Now, you will analyze the data.
+        ```txt
+        [Respondent Name] (brief description)
 
-    As you go through the transcript data, follow these steps:
+        "[Quote]"
 
-    1. Identify quotes that are related to the research question.
-    2. For each quote, note the name of the respondent and a brief summary of who they are (if provided).
-    3. Determine how the quote relates to the research question.
-
-    Format your output using simple formatted text as follows:
-
-    ```text
-    [Name of Respondent] (brief summary of who they are)
-
-    > "[Quote]"
-
-    Relation to research question: [Brief explanation of how the quote relates to the research question]
-    ```
-
-    Important guidelines:
-    - Be concise in your explanations of how the quote relates to the research question.
-    - If multiple quotes from the same respondent are relevant, you may include them under the same respondent heading.
-    - Aim for clarity and readability in your output.
-
-    Remember to process all 20 respondents, even if some may not have relevant quotes. In such cases, you can simply omit that respondent from your output.
-
-    Begin your analysis now, and present your findings in the format specified above.""")]
+        Relation to research question: [Concise explanation of how the quote connects to the research question]
+        ```
+        Additional Guidelines:
+        Keep explanations clear and to the point.
+        If a respondent has multiple relevant quotes, group them under their name.
+        If no relevant quotes are found for a respondent, omit them from your output.
+        Ensure you complete the analysis for all 20 respondents.
+        Begin your analysis now, ensuring your output adheres to the format above.""")]
 
 # Selectbox for choosing a base prompt
 selected_base_prompt = st.selectbox(

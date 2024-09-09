@@ -107,25 +107,3 @@ if submit_button:
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
         st.info("Please check your API key and try again.")
-
-if uploaded_file and question and not api_key:
-    st.info("Please enter your Anthropic API key in the sidebar to continue.")
-
-if uploaded_file and question and api_key:
-    research_data = uploaded_file
-    
-    try:
-        client = anthropic.Client(api_key=api_key)
-        message = client.messages.create(
-            model="claude-3-sonnet-20240229",
-            max_tokens=1024,
-            messages=[
-                {"role": "user", "content": f"Here's research data:\n\n{research_data}\n\n{question}"}
-            ]
-        )
-        
-        st.write("### Answer")
-        st.write(message.content[0].text)
-    except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
-        st.info("Please check your API key and try again.")

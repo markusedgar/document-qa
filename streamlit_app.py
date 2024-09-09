@@ -26,8 +26,9 @@ for filename in os.listdir(data_dir):
 # Remove trailing newlines
 uploaded_file = uploaded_file.rstrip()
 
-# Default prompts and button titles
+# Default prompts
 default_prompts = [
+    ("Custom Question", ""),
     ("Compile relevant quotes", """You are tasked with analyzing transcript data from 20 respondents and compiling a list of relevant quotes that relate to a specific research question. Your goal is to extract meaningful insights from the data and present them in a clear, organized manner.
 
         First, carefully read and understand the research question.
@@ -63,28 +64,27 @@ default_prompts = [
     ("Key Stakeholders", "Who are the key stakeholders mentioned and what are their roles?")
 ]
 
+# Selectbox for choosing a prompt
+selected_prompt = st.selectbox(
+    "Choose a prompt or select 'Custom Question' to enter your own",
+    options=[prompt[0] for prompt in default_prompts],
+    index=0,
+    key="prompt_select"
+)
+
 # Custom prompt text area
 custom_question = st.text_area(
     "Please add your research question",
     placeholder="Type your research question here",
     height=150,
-    disabled=not uploaded_file,
+    disabled=selected_prompt != "Custom Question" or not uploaded_file,
 )
 
-# Use custom question if provided, otherwise use an empty string
-question = custom_question if custom_question else ""
-
-# Buttons for default prompts
-col1, col2, col3 = st.columns(3)
-with col1:
-    if st.button(default_prompts[0][0], disabled=not uploaded_file):
-        question = default_prompts[0][1]
-with col2:
-    if st.button(default_prompts[1][0], disabled=not uploaded_file):
-        question = default_prompts[1][1]
-with col3:
-    if st.button(default_prompts[2][0], disabled=not uploaded_file):
-        question = default_prompts[2][1]
+# Set the question based on selection
+if selected_prompt == "Custom Question":
+    question = custom_question
+else:
+    question = next(prompt[1] for prompt in default_prompts if prompt[0] == selected_prompt)
 
 # Display the selected question
 st.text_area("Selected Question", value=question, height=150, disabled=True)

@@ -36,7 +36,7 @@ if uploaded_file and question and not api_key:
     st.info("Please enter your Anthropic API key in the sidebar to continue.")
 
 if uploaded_file and question and api_key:
-    article = uploaded_file.read().decode()
+    article = uploaded_file
     
     try:
         client = anthropic.Client(api_key=api_key)

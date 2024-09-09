@@ -26,11 +26,35 @@ for filename in os.listdir(data_dir):
 # Remove trailing newlines
 uploaded_file = uploaded_file.rstrip()
 
-question = st.text_input(
-    "Ask something about the article",
-    placeholder="Can you give me a short summary?",
+# Default prompts
+default_prompts = [
+    "Can you give me a short summary?",
+    "What are the main points discussed in the article?",
+    "Who are the key people mentioned and what are their roles?"
+]
+
+# Buttons for default prompts
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button(default_prompts[0]):
+        question = default_prompts[0]
+with col2:
+    if st.button(default_prompts[1]):
+        question = default_prompts[1]
+with col3:
+    if st.button(default_prompts[2]):
+        question = default_prompts[2]
+
+# Custom prompt text area
+custom_question = st.text_area(
+    "Or ask a custom question about the article",
+    placeholder="Type your custom question here",
+    height=150,
     disabled=not uploaded_file,
 )
+
+# Use custom question if provided, otherwise use the selected default prompt
+question = custom_question if custom_question else (question if 'question' in locals() else "")
 
 if uploaded_file and question and not api_key:
     st.info("Please enter your Anthropic API key in the sidebar to continue.")

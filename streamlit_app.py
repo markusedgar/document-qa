@@ -85,18 +85,19 @@ submit_button = st.button("Submit", disabled=not (uploaded_file and research_que
 if submit_button:
     research_data = uploaded_file
     
-    try:
-        client = anthropic.Client(api_key=api_key)
-        message = client.messages.create(
-            model="claude-3-sonnet-20240229",
-            max_tokens=1024,
-            messages=[
-                {"role": "user", "content": f"Here's the research data:\n\n{research_data}\n\n{combined_prompt}"}
-            ]
-        )
-        
-        st.write("### Answer")
-        st.write(message.content[0].text)
-    except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
-        st.info("Please check your API key and try again.")
+    with st.spinner("Generating answer... Please wait."):
+        try:
+            client = anthropic.Client(api_key=api_key)
+            message = client.messages.create(
+                model="claude-3-sonnet-20240229",
+                max_tokens=1024,
+                messages=[
+                    {"role": "user", "content": f"Here's the research data:\n\n{research_data}\n\n{combined_prompt}"}
+                ]
+            )
+            
+            st.write("### Answer")
+            st.write(message.content[0].text)
+        except Exception as e:
+            st.error(f"An error occurred: {str(e)}")
+            st.info("Please check your API key and try again.")

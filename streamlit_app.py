@@ -4,11 +4,9 @@ import anthropic
 st.title("📝 File Q&A with Anthropic Claude 3.5 Sonnet")
 
 # Try to get the API key from secrets, otherwise use an input field
-api_key = st.secrets.get("ANTHROPIC_API_KEY", "")
+api_key = st.secrets["ANTHROPIC_API_KEY"]
 if not api_key:
-    api_key = st.sidebar.text_input("Enter your Anthropic API key", type="password")
-    if not api_key:
-        st.sidebar.warning("Please enter your Anthropic API key to continue.")
+    st.error("Anthropic API key not found in secrets. Please add it to continue.")
 
 st.sidebar.markdown(
     "[View the source code](https://github.com/streamlit/llm-examples/blob/main/pages/1_File_Q%26A.py)"

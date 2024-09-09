@@ -26,15 +26,17 @@ uploaded_file = uploaded_file.rstrip()
 
 # Base prompts
 base_prompts = [
-    ("Compile relevant quotes", """You are tasked with analyzing transcript data from 20 respondents to compile a list of relevant quotes that address a specific research question. Your objective is to extract and present key insights from the data in an organized, easy-to-read format.
+    ("Compile relevant quotes", """You are tasked with analyzing transcript data from 20 respondents to compile a list of relevant quotes that address a specific research question or relate to a given theme. Your objective is to extract and present key insights from the data in an organized, easy-to-read format.
 
         Instructions:
-        Understand the Research Question: Start by thoroughly reading and comprehending the research question.
-        Analyze the Transcript Data: Go through the transcript data to identify quotes relevant to the research question.
+        Understand the Research Question or Research Theme: Start by thoroughly reading and comprehending the research question or theme.
+        Analyze the Transcript Data: Go through the transcript data to identify quotes relevant to the research question or theme.
+        
         Steps:
-        Extract Quotes: Identify quotes from the transcripts that are directly related to the research question.
+        Extract Quotes: Identify quotes from the transcripts that are directly related to the research question or theme.
         Respondent Identification: For each quote, note the respondent's name and provide a brief summary of who they are (if available).
-        Quote Relevance: Briefly explain how each quote relates to the research question.
+        Quote Relevance: Briefly explain how each quote relates to the research question or theme.
+        
         Formatting:
         Use the following format for your output:
 
@@ -46,6 +48,7 @@ base_prompts = [
         Relation to research question: [Concise explanation of how the quote connects to the research question]
         ```
         Additional Guidelines:
+        Make sure to only include quotes that are directly related to the research question or theme.
         Keep explanations clear and to the point.
         If a respondent has multiple relevant quotes, group them under their name.
         If no relevant quotes are found for a respondent, omit them from your output.

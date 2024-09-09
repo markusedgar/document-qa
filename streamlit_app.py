@@ -8,14 +8,23 @@ api_key = st.secrets["ANTHROPIC_API_KEY"]
 if not api_key:
     st.error("Anthropic API key not found in secrets. Please add it to continue.")
 
-st.sidebar.markdown(
-    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/pages/1_File_Q%26A.py)"
-)
-st.sidebar.markdown(
-    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
-)
+# Sidebar content removed
 
-uploaded_file = st.file_uploader("Upload an article", type=("txt", "md"))
+import os
+
+# Directory containing the text files
+data_dir = "data"
+
+# Read and merge all text files in the data directory
+uploaded_file = ""
+for filename in os.listdir(data_dir):
+    if filename.endswith((".txt", ".md")):
+        file_path = os.path.join(data_dir, filename)
+        with open(file_path, 'r') as file:
+            uploaded_file += file.read() + "\n\n"
+
+# Remove trailing newlines
+uploaded_file = uploaded_file.rstrip()
 
 question = st.text_input(
     "Ask something about the article",

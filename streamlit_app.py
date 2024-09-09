@@ -59,7 +59,6 @@ base_prompts = [
     Remember to process all 20 respondents, even if some may not have relevant quotes. In such cases, you can simply omit that respondent from your output.
 
     Begin your analysis now, and present your findings in the format specified above."""),
-    ("Main Points", "Analyze the provided research data and identify the main points discussed. Your response should:"),
     ("Key Stakeholders", "Review the research data and identify the key stakeholders mentioned. For each stakeholder:")
 ]
 
@@ -73,8 +72,8 @@ selected_base_prompt = st.selectbox(
 
 # Research question input field
 research_question = st.text_area(
-    "Enter your research question",
-    placeholder="Type your research question here",
+    "Enter your research theme or question",
+    placeholder="Type your research question or theme here",
     height=100,
     disabled=not uploaded_file,
 )

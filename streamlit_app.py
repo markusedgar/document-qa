@@ -54,12 +54,12 @@ base_prompts = [
 
         Instructions:
         Understand the Research Question or Research Theme: Start by thoroughly reading and comprehending the research question or theme.
-        Analyze the Transcript Data: Go through the transcript data to identify stakeholders who were mentioned and are related research question or theme.
+        Analyze the Transcript Data: Go through the transcript data to identify stakeholders who were mentioned and are related research question or theme. Then analyse the transcript data to further identify relationships or value exchanges between stakeholders. 
         
         Steps:
         Extract stakeholders: Identify mentions of people and organisations beyond the travelers we talked to. Extract that information from the parts of the transcripts that are related to the research question or theme.
         Respondent Identification: For each mention of a stakeholder, add a note with a brief summary of who they are (if available). 
-        Stakeholder Relevance: Briefly explain how each identified stakeholder relates to the research question or theme."""),
+        Stakeholder Relevance: Briefly explain how each identified stakeholder relates to the research question or theme. Then outline the value exchanges they are involved in."""),
 ]
 
 # Selectbox for choosing a base prompt

@@ -49,7 +49,18 @@ base_prompts = [
         If a respondent has multiple relevant quotes, group them under their name.
         If no relevant quotes are found for a respondent, omit them from your output.
         Ensure you complete the analysis for all 20 respondents.
-        Begin your analysis now, ensuring your output adheres to the format above.""")]
+        Begin your analysis now, ensuring your output adheres to the format above."""),
+        ("Identify stakeholders", """You are tasked with analyzing transcript data from 20 respondents to identify key stakeholders. Your objective is to extract and present key insights from the data in an organized, easy-to-read format.
+
+        Instructions:
+        Understand the Research Question or Research Theme: Start by thoroughly reading and comprehending the research question or theme.
+        Analyze the Transcript Data: Go through the transcript data to identify stakeholders who were mentioned and are related research question or theme.
+        
+        Steps:
+        Extract stakeholders: Identify mentions of people and organisations from the transcripts that are related to the research question or theme.
+        Respondent Identification: For each mention, note the respondent's name and provide a brief summary of who they are (if available). 
+        Quote Relevance: Briefly explain how each stakeholder relates to the research question or theme."""),
+]
 
 # Selectbox for choosing a base prompt
 selected_base_prompt = st.selectbox(

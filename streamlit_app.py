@@ -57,9 +57,9 @@ base_prompts = [
         Analyze the Transcript Data: Go through the transcript data to identify stakeholders who were mentioned and are related research question or theme.
         
         Steps:
-        Extract stakeholders: Identify mentions of people and organisations from the transcripts that are related to the research question or theme.
-        Respondent Identification: For each mention, note the respondent's name and provide a brief summary of who they are (if available). 
-        Quote Relevance: Briefly explain how each stakeholder relates to the research question or theme."""),
+        Extract stakeholders: Identify mentions of people and organisations beyond the travelers we talked to. Extract that information from the parts of the transcripts that are related to the research question or theme.
+        Respondent Identification: For each mention of a stakeholder, add a note with a brief summary of who they are (if available). 
+        Stakeholder Relevance: Briefly explain how each identified stakeholder relates to the research question or theme."""),
 ]
 
 # Selectbox for choosing a base prompt

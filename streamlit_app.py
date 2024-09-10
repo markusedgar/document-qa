@@ -61,7 +61,7 @@ base_prompts = [
         Respondent Identification: For each mention of a stakeholder, add a note with a brief summary of who they are (if available). Add ONE defining quote from the transcripts as an illustration (including who said it) 
         Stakeholder Relevance: Briefly explain how each identified stakeholder relates to the research question or theme. 
         
-        Use the following list format for your output:
+        Use a table format for your output using the following columns:
         * Stakeholder Name (brief description)
         ** Brief description of the stakeholder
         ** Example quote from the transcripts: "[Example Quote]"

@@ -62,11 +62,11 @@ base_prompts = [
         Stakeholder Relevance: Briefly explain how each identified stakeholder relates to the research question or theme. 
         
         Use the following format for your output:
-        Stakeholder Name (brief description)
-        * Brief description of the stakeholder
-        * Example quote from the transcripts: "[Example Quote]"
-        * Stakeholder Relevance & Value Exchanges: [Explanation of how the stakeholder is relevant to the research question and what value exchange exists]
-        * Respondent who mentioned the stakeholder: [list of names of the respondents who mentioned the stakeholder]
+        * Stakeholder Name (brief description)
+        ** Brief description of the stakeholder
+        ** Example quote from the transcripts: "[Example Quote]"
+        ** Stakeholder Relevance & Value Exchanges: [Explanation of how the stakeholder is relevant to the research question and what value exchange exists]
+        ** Respondent who mentioned the stakeholder: [list of names of the respondents who mentioned the stakeholder]
          """),
 ]
 

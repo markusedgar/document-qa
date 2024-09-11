@@ -129,6 +129,8 @@ def ideation_helper():
         placeholder="Describe the type of ideas you want and any specific requirements",
         height=150
     )
+    # Slider for selecting the number of ideas to generate
+    num_ideas = st.slider("Number of ideas to generate", min_value=10, max_value=25, value=15, step=1)
 
     # Submit button for idea generation
     generate_ideas_button = st.button("Generate Ideas", disabled=not idea_requirements)
@@ -147,7 +149,7 @@ def ideation_helper():
                         The ideas are just ideas. The product or service need not yet exist, nor may it
                         necessarily be clearly feasible.
                         Follow these steps. Do each step, even if you think you do not need to.
-                        First generate a list of 50 ideas (short title only).
+                        First generate a list of {num_ideas} ideas (short title only).
                         Second, go through the list and determine whether the ideas are different and
                         bold, modify the ideas as needed to make them bolder and more different. No two
                         ideas should be the same. This is important!

@@ -117,6 +117,12 @@ def main_app():
 def ideation_helper():
     st.header("Ideation Helper")
     st.write("This section will help you generate ideas based on your research findings.")
+
+     # Try to get the API key from secrets, otherwise use an input field
+    api_key = st.secrets["OPENAI_API_KEY"]
+    if not api_key:
+        st.error("OpenAI API key not found in secrets. Please add it to continue.")
+    
     # Textarea for idea requirements
     idea_requirements = st.text_area(
         "What kind of ideas are you looking for?",

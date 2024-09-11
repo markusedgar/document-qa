@@ -135,9 +135,21 @@ def ideation_helper():
                     model="gpt-4o",
                     messages=[
                         {"role": "system", "content": "You are a creative ideation assistant."},
-                        {"role": "user", "content": f"Generate innovative ideas based on the following requirements:\n\n{idea_requirements}"}
+                        {"role": "user", "content": f"""Generate new product or service ideas with the following requirements:
+                        {idea_requirements}
+
+                        The ideas are just ideas. The product or service need not yet exist, nor may it
+                        necessarily be clearly feasible.
+                        Follow these steps. Do each step, even if you think you do not need to.
+                        First generate a list of 50 ideas (short title only).
+                        Second, go through the list and determine whether the ideas are different and
+                        bold, modify the ideas as needed to make them bolder and more different. No two
+                        ideas should be the same. This is important!
+                        Next, give the ideas a name and combine it with a product or service description.
+                        The name and idea are separated by a colon and followed by a description. The
+                        idea should be expressed as a paragraph of 40-80 words. Do this step by step!"""}
                     ],
-                    max_tokens=1024
+                    max_tokens=3000
                 )
                 
                 st.write("### Generated Ideas")

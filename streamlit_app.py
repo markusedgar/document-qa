@@ -117,7 +117,7 @@ def main_app():
 def ideation_helper():
     st.header("Ideation Helper")
     st.write("This section will help you generate ideas. The ideation prompt used here is based on the following research: https://arxiv.org/abs/2402.01727")
-     st.write("""
+    st.write("""
               
      The ideation process follows these steps:
      1. Generate a list of ideas (short titles only).

@@ -2,7 +2,6 @@ import streamlit as st
 from openai import OpenAI
 import os
 
-
 def main_app():
     st.title("📝 Analyse your research data")
 
@@ -115,10 +114,9 @@ def main_app():
                 st.error(f"An error occurred: {str(e)}")
                 st.info("Please check your API key and try again.")
 
-if __name__ == "__main__":
-    main_app()
-
-
+def ideation_helper():
+    st.header("Ideation Helper")
+    st.write("This section will help you generate ideas based on your research findings.")
 
 # Create tabs
 tab1, tab2 = st.tabs(["Main App", "Ideation Helper"])
@@ -127,7 +125,6 @@ with tab1:
     main_app()
 
 with tab2:
-    st.header("Ideation Helper")
-    st.write("This section will help you generate ideas based on your research findings.")
+    ideation_helper()
     
     

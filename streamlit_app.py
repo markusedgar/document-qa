@@ -117,6 +117,15 @@ def main_app():
 def ideation_helper():
     st.header("Ideation Helper")
     st.write("This section will help you generate ideas. The ideation prompt used here is based on the following research: https://arxiv.org/abs/2402.01727")
+     st.write("""
+              
+     The ideation process follows these steps:
+     1. Generate a list of ideas (short titles only).
+     2. Review and refine the ideas to ensure they are unique and bold.
+     3. Develop each idea with a name, followed by a colon, and a 40-80 word description.
+     
+     The output will reflect this structure, presenting a series of innovative and distinct ideas.
+     """)
 
      # Try to get the API key from secrets, otherwise use an input field
     api_key = st.secrets["OPENAI_API_KEY"]

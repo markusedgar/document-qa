@@ -116,7 +116,7 @@ def main_app():
 
 def ideation_helper():
     st.header("Ideation Helper")
-    st.write("This section will help you generate ideas based on your research findings.")
+    st.write("This section will help you generate ideas. The ideation prompt used here is based on the following research: https://arxiv.org/abs/2402.01727")
 
      # Try to get the API key from secrets, otherwise use an input field
     api_key = st.secrets["OPENAI_API_KEY"]
@@ -126,7 +126,7 @@ def ideation_helper():
     # Textarea for idea requirements
     idea_requirements = st.text_area(
         "What kind of ideas are you looking for?",
-        placeholder="Describe the type of ideas you want and any specific requirements",
+        placeholder="Describe the type of ideas you want (e.g. by posting your HMW question) and any specific requirements",
         height=150
     )
     # Slider for selecting the number of ideas to generate

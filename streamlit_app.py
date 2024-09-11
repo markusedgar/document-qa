@@ -117,6 +117,34 @@ def main_app():
 def ideation_helper():
     st.header("Ideation Helper")
     st.write("This section will help you generate ideas based on your research findings.")
+    # Textarea for idea requirements
+    idea_requirements = st.text_area(
+        "What kind of ideas are you looking for?",
+        placeholder="Describe the type of ideas you want and any specific requirements",
+        height=150
+    )
+
+    # Submit button for idea generation
+    generate_ideas_button = st.button("Generate Ideas", disabled=not idea_requirements)
+
+    if generate_ideas_button:
+        with st.spinner("Generating ideas... Please wait."):
+            try:
+                client = OpenAI(api_key=api_key)
+                response = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": "You are a creative ideation assistant."},
+                        {"role": "user", "content": f"Generate innovative ideas based on the following requirements:\n\n{idea_requirements}"}
+                    ],
+                    max_tokens=1024
+                )
+                
+                st.write("### Generated Ideas")
+                st.write(response.choices[0].message.content)
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
+                st.info("Please check your API key and try again.")
 
 # Create tabs
 tab1, tab2 = st.tabs(["Main App", "Ideation Helper"])

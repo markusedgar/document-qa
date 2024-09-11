@@ -120,7 +120,7 @@ def ideation_helper():
     st.write("""
               
      The ideation process follows these steps:
-     1. Generate a list of ideas (short titles only).
+     1. Generate a list of ideas (short titles only) for possible products or services based on the requirements you provide.
      2. Review and refine the ideas to ensure they are unique and bold.
      3. Develop each idea with a name, followed by a colon, and a 40-80 word description.
      

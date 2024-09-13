@@ -189,7 +189,7 @@ def prototyping_helper():
         "Standard Slogans": """Generate 10 catchy and memorable advertisement slogans for the following concept:
         {concept}
 
-        The slogans should be:
+        The slogans should be: 
         1. Short and punchy
         2. Relevant to the concept
         3. Unique and creative

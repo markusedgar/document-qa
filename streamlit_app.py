@@ -175,13 +175,62 @@ def ideation_helper():
                 st.error(f"An error occurred: {str(e)}")
                 st.info("Please check your API key and try again.")
 
+def prototyping_helper():
+    st.header("Prototyping Helper")
+    st.write("This section will help you generate advertisement slogans for your concept.")
+
+    # Try to get the API key from secrets, otherwise use an input field
+    api_key = st.secrets["OPENAI_API_KEY"]
+    if not api_key:
+        st.error("OpenAI API key not found in secrets. Please add it to continue.")
+    
+    # Textarea for concept input
+    concept = st.text_area(
+        "Enter your concept",
+        placeholder="Describe the product or service concept for which you want to generate slogans",
+        height=100
+    )
+
+    # Submit button for slogan generation
+    generate_slogans_button = st.button("Generate Slogans", disabled=not concept)
+
+    if generate_slogans_button:
+        with st.spinner("Generating slogans... Please wait."):
+            try:
+                client = OpenAI(api_key=api_key)
+                response = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": "You are a creative advertising assistant."},
+                        {"role": "user", "content": f"""Generate 10 catchy and memorable advertisement slogans for the following concept:
+                        {concept}
+
+                        The slogans should be:
+                        1. Short and punchy
+                        2. Relevant to the concept
+                        3. Unique and creative
+                        4. Easy to remember
+
+                        Please provide a numbered list of 10 slogans."""}
+                    ],
+                    max_tokens=1000
+                )
+                
+                st.write("### Generated Slogans")
+                st.write(response.choices[0].message.content)
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
+                st.info("Please check your API key and try again.")
+
 # Create tabs
-tab1, tab2 = st.tabs(["Main App", "Ideation Helper"])
+tab1, tab2, tab3 = st.tabs(["Main App", "Ideation Helper", "Prototyping Helper"])
 
 with tab1:
     main_app()
 
 with tab2:
     ideation_helper()
-    
-    
+
+with tab3:
+    prototyping_helper()
+

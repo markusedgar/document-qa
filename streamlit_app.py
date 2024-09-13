@@ -184,6 +184,47 @@ def prototyping_helper():
     if not api_key:
         st.error("OpenAI API key not found in secrets. Please add it to continue.")
     
+    # Define prompt templates
+    prompt_templates = {
+        "Standard Slogans": """Generate 10 catchy and memorable advertisement slogans for the following concept:
+        {concept}
+
+        The slogans should be:
+        1. Short and punchy
+        2. Relevant to the concept
+        3. Unique and creative
+        4. Easy to remember
+
+        Please provide a numbered list of 10 slogans.""",
+        "Humorous Slogans": """Generate 10 funny and witty advertisement slogans for the following concept:
+        {concept}
+
+        The slogans should be:
+        1. Humorous and entertaining
+        2. Relevant to the concept
+        3. Memorable and shareable
+        4. Appropriate for the target audience
+
+        Please provide a numbered list of 10 slogans.""",
+        "Emotional Slogans": """Generate 10 emotionally appealing advertisement slogans for the following concept:
+        {concept}
+
+        The slogans should:
+        1. Evoke strong positive emotions
+        2. Connect with the audience on a personal level
+        3. Highlight the benefits or value proposition
+        4. Be memorable and impactful
+
+        Please provide a numbered list of 10 slogans."""
+    }
+
+    # Dropdown for selecting prompt template
+    selected_template = st.selectbox(
+        "Choose a slogan style",
+        options=list(prompt_templates.keys()),
+        index=0
+    )
+
     # Textarea for concept input
     concept = st.text_area(
         "Enter your concept",
@@ -198,20 +239,15 @@ def prototyping_helper():
         with st.spinner("Generating slogans... Please wait."):
             try:
                 client = OpenAI(api_key=api_key)
+                
+                # Merge selected template with concept
+                full_prompt = prompt_templates[selected_template].format(concept=concept)
+                
                 response = client.chat.completions.create(
                     model="gpt-4o",
                     messages=[
                         {"role": "system", "content": "You are a creative advertising assistant."},
-                        {"role": "user", "content": f"""Generate 10 catchy and memorable advertisement slogans for the following concept:
-                        {concept}
-
-                        The slogans should be:
-                        1. Short and punchy
-                        2. Relevant to the concept
-                        3. Unique and creative
-                        4. Easy to remember
-
-                        Please provide a numbered list of 10 slogans."""}
+                        {"role": "user", "content": full_prompt}
                     ],
                     max_tokens=1000
                 )

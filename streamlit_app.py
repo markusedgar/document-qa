@@ -258,8 +258,71 @@ def prototyping_helper():
                 st.error(f"An error occurred: {str(e)}")
                 st.info("Please check your API key and try again.")
 
+def implementation_helper():
+    st.header("Implementation Helper")
+    st.write("This section will help you generate next steps to implement your concept.")
+
+    # Try to get the API key from secrets, otherwise use an input field
+    api_key = st.secrets["OPENAI_API_KEY"]
+    if not api_key:
+        st.error("OpenAI API key not found in secrets. Please add it to continue.")
+    
+    # Textarea for concept input
+    concept = st.text_area(
+        "Enter your concept",
+        placeholder="Describe the product or service concept you want to implement",
+        height=100
+    )
+
+    # Dropdown for selecting implementation phase
+    implementation_phase = st.selectbox(
+        "Choose the implementation phase",
+        options=["Planning", "Development", "Testing", "Launch", "Post-launch"],
+        index=0
+    )
+
+    # Submit button for generating implementation steps
+    generate_steps_button = st.button("Generate Implementation Steps", disabled=not concept)
+
+    if generate_steps_button:
+        with st.spinner("Generating implementation steps... Please wait."):
+            try:
+                client = OpenAI(api_key=api_key)
+                
+                prompt = f"""Generate a detailed list of next steps to implement the following concept:
+                {concept}
+
+                Focus on the {implementation_phase} phase of implementation.
+
+                Please provide:
+                1. A numbered list of 5-7 concrete, actionable steps
+                2. A brief explanation for each step
+                3. Potential challenges or considerations for each step
+
+                Format each step as follows:
+                Step X: [Step Name]
+                - Explanation: [Brief explanation of the step]
+                - Considerations: [Potential challenges or important points to consider]
+
+                """
+                
+                response = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": "You are a helpful product implementation assistant."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    max_tokens=1500
+                )
+                
+                st.write("### Implementation Steps")
+                st.write(response.choices[0].message.content)
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
+                st.info("Please check your API key and try again.")
+
 # Create tabs
-tab1, tab2, tab3 = st.tabs(["Main App", "Ideation Helper", "Prototyping Helper"])
+tab1, tab2, tab3, tab4 = st.tabs(["Main App", "Ideation Helper", "Prototyping Helper", "Implementation Helper"])
 
 with tab1:
     main_app()
@@ -269,4 +332,7 @@ with tab2:
 
 with tab3:
     prototyping_helper()
+
+with tab4:
+    implementation_helper()
 

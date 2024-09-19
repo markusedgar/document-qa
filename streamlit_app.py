@@ -321,8 +321,59 @@ def implementation_helper():
                 st.error(f"An error occurred: {str(e)}")
                 st.info("Please check your API key and try again.")
 
+def change_management_helper():
+    st.header("Change Management Helper")
+    st.write("This section will help you identify potential resistance within the organization when implementing a given concept.")
+
+    # Try to get the API key from secrets, otherwise use an input field
+    api_key = st.secrets["OPENAI_API_KEY"]
+    if not api_key:
+        st.error("OpenAI API key not found in secrets. Please add it to continue.")
+    
+    # Textarea for concept input
+    concept = st.text_area(
+        "Enter your concept",
+        placeholder="Describe the concept you want to implement",
+        height=100
+    )
+
+    # Submit button for generating resistance identification
+    generate_resistance_button = st.button("Identify Potential Resistance", disabled=not concept)
+
+    if generate_resistance_button:
+        with st.spinner("Analyzing potential resistance... Please wait."):
+            try:
+                client = OpenAI(api_key=api_key)
+                prompt = f"""Identify potential areas of resistance within the organization when implementing the following concept:
+                {concept}
+
+                Please provide:
+                1. A numbered list of 5-7 potential sources of resistance
+                2. A brief explanation for each source
+                3. Suggestions on how to mitigate each resistance
+
+                Format each point as follows:
+                Source X: [Source Name]
+                - Explanation: [Brief explanation of the resistance]
+                - Mitigation: [Suggestions for addressing the resistance]
+                """
+                response = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": "You are a change management assistant."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    max_tokens=1500
+                )
+                
+                st.write("### Potential Resistance and Mitigation Strategies")
+                st.write(response.choices[0].message.content)
+            except Exception as e:
+                st.error(f"An error occurred: {str(e)}")
+                st.info("Please check your API key and try again.")
+
 # Create tabs
-tab1, tab2, tab3, tab4 = st.tabs(["Main App", "Ideation Helper", "Prototyping Helper", "Implementation Helper"])
+tab1, tab2, tab3, tab4, tab5 = st.tabs(["Main App", "Ideation Helper", "Prototyping Helper", "Implementation Helper", "Change Management Helper"])
 
 with tab1:
     main_app()
@@ -335,4 +386,7 @@ with tab3:
 
 with tab4:
     implementation_helper()
+
+with tab5:
+    change_management_helper()
 
